@@ -4,6 +4,8 @@ export type Cents = number;
 export interface Event {
   id: string;
   name: string;
+  /** Rush-Listed: sold through the Rush app, so it can carry the Rush Discount. */
+  rushListed?: boolean;
 }
 
 /** A ticket type for an Event, with its unit price. */

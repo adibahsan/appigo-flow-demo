@@ -13,5 +13,7 @@ export function priceOrder(order: Order): PricedOrder {
       total: quantity * ticket.unitPrice,
     };
   });
-  return { lines, total: lines.reduce((sum, line) => sum + line.total, 0) };
+  const subtotal = lines.reduce((sum, line) => sum + line.total, 0);
+  const rushDiscount = order.event.rushListed ? Math.floor(subtotal / 10) : 0;
+  return { lines, total: subtotal - rushDiscount };
 }

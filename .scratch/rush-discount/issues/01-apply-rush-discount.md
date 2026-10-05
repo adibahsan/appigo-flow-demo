@@ -4,9 +4,13 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] An Order for a Rush-Listed Event has its total reduced by 10%, rounded down to whole cents
-- [ ] An Order for an Event that is not Rush-Listed is priced exactly as before
-- [ ] An empty Order for a Rush-Listed Event still totals zero
-- [ ] Tests go through the pricing function only, and the existing tests still pass
+- [x] An Order for a Rush-Listed Event has its total reduced by 10%, rounded down to whole cents
+- [x] An Order for an Event that is not Rush-Listed is priced exactly as before
+- [x] An empty Order for a Rush-Listed Event still totals zero
+- [x] Tests go through the pricing function only, and the existing tests still pass
+
+## Comments
+
+Implemented through `priceOrder` only: a Rush-Listed Event takes 10% off the sum of the lines, rounded down to whole cents. `npm test` and `npm run typecheck` green.
