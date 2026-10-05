@@ -4,7 +4,7 @@ description: Security review of the current changes, applying the hms security s
 
 # Security Review (skill-driven)
 
-You are running a **security-focused** review of the appigo-flow-demo codebase (TypeScript, vitest; a pure pricing function with no database, network, framework or UI). This review applies the hms security skills committed under `.claude/skills/`:
+You are running a **security-focused** review of the appigo-flow-demo codebase (TypeScript, vitest; a pure pricing function with no database, network, framework or UI). This review applies three hms security skills from the internal hms-coding-rules repo. **They are not in this public repo** (they are gitignored); appiGo developers copy them into `.claude/skills/` from hms-coding-rules. Before anything else, check that each skill below has a `SKILL.md`; if any is missing, say which ones and stop without reviewing.
 
 | Skill | Concern |
 |-------|---------|

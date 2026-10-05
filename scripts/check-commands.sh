@@ -48,7 +48,9 @@ ok ".env mentions checked"
 for c in "${CMDS[@]}"; do
   f=".claude/commands/$c.md"; [ -f "$f" ] || continue
   for s in $(grep -oE '\.claude/skills/[A-Za-z0-9_-]+' "$f" | sort -u); do
-    [ -f "$s/SKILL.md" ] && ok "$f -> $s" || bad "$f references missing skill $s"
+    if [ -f "$s/SKILL.md" ]; then ok "$f -> $s"
+    elif [ "$c" = hms-review ] && grep -qx "${s}/" .gitignore; then echo "skip: $f -> $s (internal hms skill not installed)"
+    else bad "$f references missing skill $s"; fi
   done
 done
 

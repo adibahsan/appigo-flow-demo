@@ -4,3 +4,8 @@ dist/
 .env.*
 *.log
 .DS_Store
+
+# Internal hms-coding-rules skills: used locally by /hms-review, never published
+.claude/skills/application-config-secret-management/
+.claude/skills/input-validation-and-sanitization/
+.claude/skills/owasp-broken-access-control/

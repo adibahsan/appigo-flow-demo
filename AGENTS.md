@@ -15,7 +15,7 @@ Every test calls `priceOrder` and asserts on the returned `lines` and `total`. N
 
 Matt Pocock's skills are committed in `.claude/skills/` and pinned by `skills-lock.json`. Repo-specific commands live in `.claude/commands/`.
 
-Three skills are not managed by `skills-lock.json`: the adapted hms skills (`application-config-secret-management`, `input-validation-and-sanitization`, `owasp-broken-access-control`). They are committed, locally maintained copies: they were adapted for this TypeScript demo, so a lockfile pin to an upstream source would not describe what is in the repo. Update them by editing the committed files, not with the skills installer. Every other skill, including `pr`, comes from `mattpocock/skills` and is pinned in the lockfile; update those with `npx skills add mattpocock/skills -a claude-code --copy`.
+`/hms-review` uses three skills from appiGo's internal hms-coding-rules repo (`application-config-secret-management`, `input-validation-and-sanitization`, `owasp-broken-access-control`). They are internal, so they are gitignored and never committed; appiGo developers copy them into `.claude/skills/` locally. Without them `/hms-review` stops and says so. Every other skill, including `pr`, comes from `mattpocock/skills` and is pinned in the lockfile; update those with `npx skills add mattpocock/skills -a claude-code --copy`.
 
 ## Agent skills
 
