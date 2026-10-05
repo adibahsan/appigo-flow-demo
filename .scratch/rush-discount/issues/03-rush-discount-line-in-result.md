@@ -4,9 +4,13 @@
 
 **Blocked by:** 01, 02
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] A discounted result carries a Rush Discount line with a negative amount equal to the saving
-- [ ] The total equals the sum of the item lines plus the discount line
-- [ ] A result with no discount (not Rush-Listed, or a refused second use) has no discount line, and existing results are unchanged
-- [ ] Tests go through the pricing function only
+- [x] A discounted result carries a Rush Discount line with a negative amount equal to the saving
+- [x] The total equals the sum of the item lines plus the discount line
+- [x] A result with no discount (not Rush-Listed, or a refused second use) has no discount line, and existing results are unchanged
+- [x] Tests go through the pricing function only
+
+## Comments
+
+Implemented through `priceOrder` only: a discounted result carries a Rush Discount line with a negative amount, and the total adds it to the item lines. `npm test` and `npm run typecheck` green.

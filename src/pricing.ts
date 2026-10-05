@@ -18,5 +18,7 @@ export function priceOrder(order: Order, options: PriceOptions = {}): PricedOrde
   const rushEligible = order.event.rushListed && !options.rushUses?.has(useKey);
   const rushDiscount = rushEligible ? Math.floor(subtotal / 10) : 0;
   if (rushEligible) options.rushUses?.add(useKey);
-  return { lines, total: subtotal - rushDiscount };
+  if (rushDiscount === 0) return { lines, total: subtotal };
+  const discountLine = { description: "Rush Discount", amount: -rushDiscount };
+  return { lines, discountLine, total: subtotal + discountLine.amount };
 }

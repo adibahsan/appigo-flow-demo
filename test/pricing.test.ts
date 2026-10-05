@@ -73,4 +73,24 @@ describe("priceOrder", () => {
     expect(priceOrder(rushOrder).total).toBe(4500);
     expect(priceOrder(rushOrder).total).toBe(4500);
   });
+
+  it("shows the Rush Discount as its own line, and the total adds it to the item lines", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const result = priceOrder({
+      account,
+      event: rushEvent,
+      items: [{ ticket: general, quantity: 2 }],
+    });
+    expect(result.discountLine).toEqual({ description: "Rush Discount", amount: -500 });
+    expect(result.total).toBe(4500);
+  });
+
+  it("has no discount line when the Order gets no discount", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const rushUses = new Set<string>();
+    const rushOrder = { account, event: rushEvent, items: [{ ticket: general, quantity: 2 }] };
+    priceOrder(rushOrder, { rushUses });
+    expect(priceOrder(rushOrder, { rushUses }).discountLine).toBeUndefined();
+    expect(priceOrder(order([{ ticket: general, quantity: 2 }])).discountLine).toBeUndefined();
+  });
 });

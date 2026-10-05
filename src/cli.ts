@@ -28,4 +28,7 @@ for (const line of priced.lines) {
   );
 }
 console.log("  " + "─".repeat(width));
+if (priced.discountLine) {
+  console.log("  " + row("Rush Discount (10%)", money(priced.discountLine.amount)));
+}
 console.log("  " + row("Total", money(priced.total)));

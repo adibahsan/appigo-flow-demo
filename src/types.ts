@@ -39,8 +39,16 @@ export interface PricedLine {
   total: Cents;
 }
 
+/** A discount shown as its own line; amount is negative. */
+export interface DiscountLine {
+  description: string;
+  amount: Cents;
+}
+
 export interface PricedOrder {
   lines: PricedLine[];
+  /** Present only when a discount was applied. */
+  discountLine?: DiscountLine;
   total: Cents;
 }
 
