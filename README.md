@@ -20,6 +20,7 @@ Base pricing is quantity x unit price per line, summed. Source is in `src/`, tes
 npm install
 npm test            # vitest
 npm run typecheck   # tsc --noEmit
+npm start           # print a receipt for one sample order
 ```
 
 ## Replay the flow
