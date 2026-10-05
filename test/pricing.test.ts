@@ -47,4 +47,30 @@ describe("priceOrder", () => {
     });
     expect(result.total).toBe(4500);
   });
+
+  it("refuses a second Rush Discount for the same Account and Event", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const rushUses = new Set<string>();
+    const rushOrder = { account, event: rushEvent, items: [{ ticket: general, quantity: 2 }] };
+    expect(priceOrder(rushOrder, { rushUses }).total).toBe(4500);
+    expect(priceOrder(rushOrder, { rushUses }).total).toBe(5000);
+  });
+
+  it("still grants the Rush Discount to another Account or another Rush-Listed Event", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const otherEvent = { id: "e2", name: "Summer Festival", rushListed: true };
+    const rushUses = new Set<string>();
+    const items = [{ ticket: general, quantity: 2 }];
+    priceOrder({ account, event: rushEvent, items }, { rushUses });
+    const otherAccount = { id: "a2", name: "Grace" };
+    expect(priceOrder({ account: otherAccount, event: rushEvent, items }, { rushUses }).total).toBe(4500);
+    expect(priceOrder({ account, event: otherEvent, items }, { rushUses }).total).toBe(4500);
+  });
+
+  it("applies the Rush Discount every time when no record of uses is supplied", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const rushOrder = { account, event: rushEvent, items: [{ ticket: general, quantity: 2 }] };
+    expect(priceOrder(rushOrder).total).toBe(4500);
+    expect(priceOrder(rushOrder).total).toBe(4500);
+  });
 });

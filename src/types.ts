@@ -43,3 +43,9 @@ export interface PricedOrder {
   lines: PricedLine[];
   total: Cents;
 }
+
+/** Optional extras for pricing. */
+export interface PriceOptions {
+  /** Record of Rush Uses, keyed "accountId:eventId". Granting the Rush Discount adds to it. */
+  rushUses?: Set<string>;
+}

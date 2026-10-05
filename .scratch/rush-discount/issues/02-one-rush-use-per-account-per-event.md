@@ -4,10 +4,14 @@
 
 **Blocked by:** 01
 
-**Status:** ready-for-agent
+**Status:** resolved
 
-- [ ] With a record supplied, the first Order for an Account and Rush-Listed Event gets the discount
-- [ ] A second Order for the same Account and Event, with the same record, is priced at full price and is not rejected
-- [ ] A different Account on the same Event, and the same Account on a different Rush-Listed Event, each still get the discount
-- [ ] Without a record, the discount applies every time
-- [ ] Tests go through the pricing function only, and calling it with just an Order still works
+- [x] With a record supplied, the first Order for an Account and Rush-Listed Event gets the discount
+- [x] A second Order for the same Account and Event, with the same record, is priced at full price and is not rejected
+- [x] A different Account on the same Event, and the same Account on a different Rush-Listed Event, each still get the discount
+- [x] Without a record, the discount applies every time
+- [x] Tests go through the pricing function only, and calling it with just an Order still works
+
+## Comments
+
+Implemented through `priceOrder` only: an optional record of Rush Uses is filled when the discount is granted, and a second Order for the same Account and Event is priced at full price. Calling it with just an Order still works. `npm test` and `npm run typecheck` green.
