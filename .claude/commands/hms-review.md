@@ -20,19 +20,19 @@ Each skill contains rules and a checklist; those are the rubric. The hms skills 
 
 ### 1. Determine review scope
 
-`$ARGUMENTS` may specify a base (tag, branch or commit), a path filter, or `staged`. Otherwise use the defaults.
+`$ARGUMENTS` may specify a base ref (tag, branch or commit), for example `/hms-review main`, a path filter, or `staged`. Use the base ref as `<base>`; with no argument, default `<base>` to `main`.
 
 ```bash
 git branch --show-current
-git merge-base HEAD main
-git diff --stat $(git merge-base HEAD main)..HEAD -- ':(exclude).scratch' ':(exclude)package-lock.json'
+git merge-base HEAD <base>
+git diff --stat <base>...HEAD -- ':(exclude).scratch' ':(exclude)package-lock.json'
 git status --short
 git diff --stat
 ```
 
 - No args: review the branch changes vs the `main` merge-base plus uncommitted changes.
 - `staged`: review only `git diff --staged`.
-- A ref: diff `<ref>..HEAD`. A path: restrict the diff to that path.
+- A ref (`<base>`): diff `<base>...HEAD`. A path: restrict the diff to that path.
 
 Print the resolved scope (base, file count, changed files) before proceeding.
 

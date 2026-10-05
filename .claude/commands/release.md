@@ -11,14 +11,15 @@ You are drafting release notes for appigo-flow-demo. This command **stops at app
 ### 1. Identify release range and gather inputs
 
 ```bash
-git describe --tags --abbrev=0   # errors if the repo has no tags yet; that is expected, use the fallback below
+git describe --tags --abbrev=0 --exclude 'stage-*'   # ignores the demo stage-* tags; errors if there is no release tag, then use the first commit below
+git rev-list --max-parents=0 HEAD   # first commit (fallback base)
 git branch --show-current
 git config user.name
 ```
 
 Ask the user for these inputs, suggesting defaults:
 
-- **Base ref**: what to diff from. Default: the latest tag if any, otherwise `main` when on another branch, otherwise the first commit.
+- **Base ref**: what to diff from. Default: the latest release tag (never a `stage-*` demo tag), otherwise the first commit. This works from `main`, from the backup branch tip or from a detached `stage-*` tag. Pass an explicit base (for example `main`) to draft notes for just a branch.
 - **Version number**: e.g. `0.1.0`. Suggest the next minor bump from `package.json`. The version is a label in the draft only; it is not applied anywhere.
 - **Short description**: one line summarising the release.
 - **Released by**: default to `git config user.name`.

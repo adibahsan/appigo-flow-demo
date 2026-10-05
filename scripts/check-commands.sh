@@ -22,6 +22,19 @@ if [ -f "$rel" ]; then
   grep -qi 'stops at approval' "$rel" && ok "release.md states it stops at approval" || bad "release.md must state it stops at approval"
 fi
 
+# /release must ignore the stage-* demo tags when it looks for the latest release tag.
+if [ -f "$rel" ]; then
+  grep -q "git describe --tags --abbrev=0 --exclude 'stage-\*'" "$rel" && ok "release.md ignores stage-* tags" || bad "release.md must use: git describe --tags --abbrev=0 --exclude 'stage-*'"
+fi
+
+# /review and /hms-review must take an explicit base ref and diff <base>...HEAD (not a hard-coded main).
+for c in review hms-review; do
+  f=".claude/commands/$c.md"; [ -f "$f" ] || continue
+  grep -q '<base>\.\.\.HEAD' "$f" && ok "$f diffs <base>...HEAD" || bad "$f must diff <base>...HEAD"
+  if grep -nE 'main\.\.\.HEAD|main\.\.HEAD|no release tags' "$f"; then bad "$f hard-codes main or says there are no release tags"; else ok "$f has no hard-coded main range"; fi
+  grep -q "/$c main" "$f" && ok "$f documents '/$c main'" || bad "$f must document '/$c main'"
+done
+
 # No command may read .env: every mention must be a prohibition.
 for c in "${CMDS[@]}"; do
   f=".claude/commands/$c.md"; [ -f "$f" ] || continue

@@ -10,20 +10,20 @@ You are reviewing the appigo-flow-demo codebase (TypeScript, vitest, integer-cen
 
 ### 1. Identify the review range
 
-`$ARGUMENTS` may name a base (branch, tag or SHA). Default base is `main`. This repo has no release tags and no remote, so do not look for one.
+`$ARGUMENTS` may name a base ref (branch, tag or SHA), for example `/review main`. Use it as `<base>`. With no argument, default `<base>` to `main`. The repo has no remote; any `stage-*` tags are demo markers, not release tags, so do not use them as a base.
 
 ```bash
 git branch --show-current
-git merge-base HEAD main
-git log --oneline --first-parent main..HEAD
+git merge-base HEAD <base>
+git log --oneline --first-parent <base>..HEAD
 ```
 
-If the current branch is `main`, ask the user which branch or ref to review instead.
+If `HEAD` is the same as `<base>` (for example you are on `main` with no argument), ask the user which branch or ref to review instead.
 
 ### 2. Measure the scope
 
 ```bash
-git diff --stat main...HEAD -- ':(exclude).scratch' ':(exclude)package-lock.json' ':(exclude).claude'
+git diff --stat <base>...HEAD -- ':(exclude).scratch' ':(exclude)package-lock.json' ':(exclude).claude'
 ```
 
 ### 3. Launch parallel exploration agents
@@ -65,7 +65,7 @@ Write findings to `docs/CODE_REVIEW_<BRANCH_NAME>.md` (replace `/` in the branch
 (Table: Area | Rating /10 | Key Concerns)
 
 ## Critical Issues
-(Wrong money totals charged to customers, data loss, secrets committed)
+(Wrong money totals charged to Accounts, data loss, secrets committed)
 
 ## High Priority Issues
 (Bugs, missing validation, behaviour with no test)

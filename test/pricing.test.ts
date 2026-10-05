@@ -3,7 +3,7 @@ import { priceOrder } from "../src/index.js";
 import type { Order } from "../src/index.js";
 
 const account = { id: "a1", name: "Ada" };
-const event = { id: "e1", name: "Spring Gig" };
+const event = { id: "e1", name: "Spring Festival" };
 const general = { id: "t-general", name: "General", unitPrice: 2500 };
 const vip = { id: "t-vip", name: "VIP", unitPrice: 9900 };
 
