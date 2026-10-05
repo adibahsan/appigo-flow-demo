@@ -37,4 +37,14 @@ describe("priceOrder", () => {
     expect(() => priceOrder(order([{ ticket: general, quantity: 0 }]))).toThrow(/quantity/i);
     expect(() => priceOrder(order([{ ticket: general, quantity: 1.5 }]))).toThrow(/quantity/i);
   });
+
+  it("takes 10% off an Order for a Rush-Listed Event", () => {
+    const rushEvent = { ...event, rushListed: true };
+    const result = priceOrder({
+      account,
+      event: rushEvent,
+      items: [{ ticket: general, quantity: 2 }],
+    });
+    expect(result.total).toBe(4500);
+  });
 });
