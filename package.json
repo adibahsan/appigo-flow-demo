@@ -6,7 +6,8 @@
   "description": "Cut-down event-ticketing core used to demo the agentic coding flow",
   "scripts": {
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:commands": "bash scripts/check-commands.sh"
   },
   "devDependencies": {
     "@types/node": "26.6.4",
